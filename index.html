@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="เว็บไซต์แสดงผลงานและทักษะบาสเกตบอลของ BAIKHAW">
+    <title>ความภาคภูมิใจของ BAIKHAW</title>
+    
+    <!-- นำเข้า Google Fonts ภาษาไทย และภาษาอังกฤษเพื่อความโมเดิร์นและอ่านง่าย -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- นำเข้า Tailwind CSS และ FontAwesome สำหรับ Icons เพื่อความสวยงาม -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Kanit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316', /* เปลี่ยนเป็นสีส้มบาสเกตบอล */
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* ซ่อน Scrollbar ของบราวเซอร์เพื่อความเรียบร้อย แต่ยังสามารถเลื่อนได้ปกติ */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Bar หรูหราที่เลื่อนตามหน้าจอ (Sticky Navigation) -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- โลโก้แบรนด์ -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-xl font-bold bg-gradient-to-r from-primary-600 to-amber-500 bg-clip-text text-transparent">BAIKHAW.SPORTS</span>
+                </div>
+                
+                <!-- ปุ่มเมนูสำหรับ Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium hover:text-primary-500 transition-colors">เกี่ยวกับฉัน</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-primary-500 transition-colors">ผลงาน & ความสำเร็จ</a>
+                    <a href="#skills" class="text-sm font-medium hover:text-primary-500 transition-colors">ทักษะบาสเกตบอล</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-primary-500 transition-colors">ติดต่อฉัน</a>
+                </div>
+
+                <!-- ปรับแต่ง UI ควมคุม Dark/Light Mode -->
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
+                        <i id="theme-toggle-dark-icon" class="hidden fas fa-moon text-lg text-slate-600"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fas fa-sun text-lg text-amber-500"></i>
+                    </button>
+                    <!-- ปุ่มเมนูบนมือถือ (Mobile Hamburger Menu) -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- เมนูแสดงบน Mobile Screen -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-4 py-3 space-y-2">
+            <a href="#about" class="block py-2 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-base font-medium">เกี่ยวกับฉัน</a>
+            <a href="#projects" class="block py-2 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-base font-medium">ผลงาน & ความสำเร็จ</a>
+            <a href="#skills" class="block py-2 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-base font-medium">ทักษะบาสเกตบอล</a>
+            <a href="#contact" class="block py-2 px-3 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-base font-medium">ติดต่อฉัน</a>
+        </div>
+    </nav>
+
+    <!-- ส่วนหัวของเว็บ (Header) -->
+    <header class="relative overflow-hidden py-20 md:py-32 flex items-center justify-center">
+        <!-- เอฟเฟกต์พื้นหลังหรูหรา -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-primary-100 dark:bg-primary-900/20 rounded-full blur-3xl opacity-50"></div>
+            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-amber-100 dark:bg-amber-900/20 rounded-full blur-3xl opacity-50"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-4">
+            <!-- อวตาร์จำลองบาสเกตบอล -->
+            <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-tr from-primary-500 to-amber-500 text-white text-3xl font-bold mb-6 shadow-xl shadow-primary-500/20 animate-bounce">
+                BK
+            </div>
+            <!-- หัวข้อหลักและคำโปรย -->
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+                สวัสดี! ฉันคือ <span class="bg-gradient-to-r from-primary-600 to-amber-500 bg-clip-text text-transparent">BAIKHAW</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8 font-light">
+                นี่คือความสำเร็จและทักษะกีฬาบาสเกตบอลที่ฉันภาคภูมิใจ
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#projects" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 transform hover:-translate-y-0.5 transition-all">
+                    ดูผลงานการแข่ง
+                </a>
+                <a href="#contact" class="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold rounded-xl border border-slate-200 dark:border-slate-700 transform hover:-translate-y-0.5 transition-all">
+                    ติดต่อฉัน
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- พื้นที่เนื้อหาหลัก (Main Content) -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <!-- ส่วนเกี่ยวกับตัวเอง (About) -->
+        <section id="about" class="scroll-mt-24">
+            <div class="max-w-3xl mx-auto bg-white dark:bg-slate-800/50 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500">
+                        <i class="fas fa-basketball-ball"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold">เกี่ยวกับฉัน</h2>
+                </div>
+                <!-- คำอธิบายด้านกีฬาบาสเกตบอล -->
+                <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+                    ฉันเป็นนักกีฬาบาสเกตบอลที่มีความหลงใหลในการเล่น การฝึกฝน และการทำงานร่วมกันเป็นทีม มุ่งมั่นพัฒนาศักยภาพทั้งด้านสมรรถภาพร่างกายและแผนการเล่น เพื่อเป้าหมายในการคว้าชัยชนะร่วมกับทีมในทุกทัวร์นาเมนต์
+                </p>
+                
+                <!-- ข้อมูลเพิ่มเติมของนักกีฬา -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+                    <div>
+                        <p class="text-sm text-slate-400 dark:text-slate-500">ตำแหน่งในสนาม</p>
+                        <p class="font-semibold text-slate-700 dark:text-slate-200">Point Guard / Shooting Guard</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-400 dark:text-slate-500">สังกัดทีม / สมาคม</p>
+                        <p class="font-semibold text-slate-700 dark:text-slate-200">กรุงเทพฯ, ประเทศไทย</p>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <p class="text-sm text-slate-400 dark:text-slate-500">คติประจำใจในการเล่น</p>
+                        <p class="font-semibold text-slate-700 dark:text-slate-200">"ทีมเวิร์กและการซ้อมหนักคือหัวใจของชัยชนะ"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนแสดงผลงานการแข่งบาสเกตบอล (Projects/Achievements) -->
+        <section id="projects" class="scroll-mt-24">
+            <div class="text-center max-w-3
